@@ -10,6 +10,7 @@ var bookTitle = sheet.getRange(4,9).getValue();
 var addPagerInput = sheet.getRange(5,9).getValue();
 var updatePagerInput = sheet.getRange(8, 8).getValue();
 var removePagerInput = sheet.getRange(11, 8).getValue();
+var inputField = sheet.getRange(3, 9, 3);
 
 function onEdit(e){
   var source = e.source.getActiveSheet().getActiveCell();
@@ -48,6 +49,7 @@ function addDecline() {
   addPager(firstEmptyRow, 'declined');
   addInfoAndDate(firstEmptyRow);
   formatRow(firstEmptyRow, 'line-through');
+  formatInputField();
 }
 
 function addAccept() {
@@ -56,6 +58,7 @@ function addAccept() {
   addPager(firstEmptyRow, addPagerInput);
   addInfoAndDate(firstEmptyRow);
   formatRow(firstEmptyRow, 'none');
+  formatInputField();
 }
 
 function addPager(row, value){
@@ -74,6 +77,16 @@ function formatRow(row, format){
   for(i = 1; i <= 6; i++){
     sheet.getRange(row, i).setFontLine(format);
   }
+}
+
+function formatInputField(){
+  inputField.setBorder(true, true, true, true, false, true, null, SpreadsheetApp.BorderStyle.SOLID);
+  inputField.setBackgroundRGB(255, 255, 255);
+  inputField.setFontColor('black');
+  inputField.setFontFamily("Arial");
+  inputField.setFontLine('none');
+  inputField.setFontWeight('normal');
+  inputField.setFontStyle('normal');
 }
 
 function clearItemForm(){
